@@ -4,20 +4,22 @@
 
 #include "Tank.h"
 #include "CoreMinimal.h"
-#include "GameFramework/PlayerController.h"
-#include "TankPlayerController.generated.h" //Must be last include, quirk UE4
+#include "AIController.h"
+#include "TankAIController.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BATTLETANK_API ATankPlayerController : public APlayerController
+class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
 public:
     virtual void BeginPlay() override;
     
-    ATank* GetControlledTank() const;
+    ATank* GetAITank() const;
+	
+    ATank* GetPlayerTank() const;
 	
 };
