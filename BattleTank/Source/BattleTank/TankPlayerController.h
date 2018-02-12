@@ -14,10 +14,32 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+    
+    ATank* GetControlledTank() const;
+    
+    //barrel moves when the white box moves for an accurate shot
+    void AimTowardCrosshair();
+    
+    bool GetSightRayLocation(FVector& HitLocation) const;
+    
+    bool GetLookDirection(FVector2D screenLocation, FVector& lookDirection) const;
+    
+    bool GetLookVectorHitLocation(FVector lookdirection,FVector& hitLocation) const;
+    
+    UPROPERTY(EditAnywhere)
+    float CrosshairXLocation=0.5;
+    
+    UPROPERTY(EditAnywhere)
+    float CrosshairYLocation=0.3333;
+    
+    UPROPERTY(EditAnywhere)
+    float range = 1000000;
+    
 public:
     virtual void BeginPlay() override;
     
-    ATank* GetControlledTank() const;
+    virtual void Tick(float deltaTime) override;
+    
+
 	
 };
