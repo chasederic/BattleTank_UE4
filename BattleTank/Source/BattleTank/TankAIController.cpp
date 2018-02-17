@@ -7,7 +7,7 @@ void ATankAIController::BeginPlay(){
     
     auto found=GetPlayerTank();
     if(found){
-        UE_LOG(LogTemp,Warning,TEXT("%s tank found %s"), *(found->GetName()))
+        UE_LOG(LogTemp,Warning,TEXT("AI tank found %s"), *(found->GetName()))
     }else{
         UE_LOG(LogTemp,Warning,TEXT("AI tank could not find player tank"))
     }
