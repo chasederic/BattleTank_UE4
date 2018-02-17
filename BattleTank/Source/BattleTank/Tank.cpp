@@ -35,7 +35,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 void ATank::AimAt(FVector hitLocation){
-    tankAimingComponent->AimAt(hitLocation);
+    tankAimingComponent->AimAt(hitLocation,launchSpeed);
 }
 
 void ATank::SetBarrelReference(UStaticMeshComponent* barrelToSet)

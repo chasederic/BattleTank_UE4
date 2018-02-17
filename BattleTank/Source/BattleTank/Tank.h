@@ -27,6 +27,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = Setup)
     void SetBarrelReference(UStaticMeshComponent* barrelToSet);
     
+    UPROPERTY(EditAnywhere, Category=Firing)
+    float launchSpeed = 158000;                     // 1580 m/s, low end of reheinmetall 120 mmtank gun
+                                                    // muzzle velocity - used on M1A1 abrams
+    
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
