@@ -3,6 +3,7 @@
 #pragma once
 
 #include "TankBarrel.h"
+#include "Turret.h"
 #include "Kismet/GameplayStatics.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -20,12 +21,13 @@ public:
     
     void AimAt(FVector hitLocation, float launchSpeed);
     
-    // TODO add SetTurretReference
-    
     void SetBarrelReference(UTankBarrel* barrel);
+    
+    void SetTurretReference(UTurret* turret);
     
 private:
     UTankBarrel* barrel=nullptr;
+    UTurret* turret=nullptr;
     
     void MoveBarrelTowards(FVector aimDirection);
 

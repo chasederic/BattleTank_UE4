@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Turret.h"
 #include "TankBarrel.h"
 #include "TankAimingComponent.h"
 #include "CoreMinimal.h"
@@ -24,6 +25,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Category = Setup)
     void SetBarrelReference(UTankBarrel* barrelToSet);
+    
+    UFUNCTION(BlueprintCallable, Category = Setup)
+    void SetTurretReference(UTurret* turretToSet);
     
     UPROPERTY(EditAnywhere, Category=Firing)
     float launchSpeed = 158000;                     // 1580 m/s, low end of reheinmetall 120 mmtank gun
