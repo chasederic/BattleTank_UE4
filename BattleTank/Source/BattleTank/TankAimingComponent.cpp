@@ -13,7 +13,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* barrelToSet){
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* barrelToSet){
     barrel=barrelToSet;
 }
 
@@ -24,7 +24,7 @@ void UTankAimingComponent::AimAt(FVector hitLocation, float launchSpeed){
     }
     FVector outLaunchVelocity;
     FVector startLocation = barrel->GetSocketLocation(FName("Projectile"));
-    bool aimSolution=UGameplayStatics::SuggestProjectileVelocity(this,outLaunchVelocity,startLocation,hitLocation,launchSpeed,ESuggestProjVelocityTraceOption::DoNotTrace);
+    bool aimSolution=UGameplayStatics::SuggestProjectileVelocity(this,outLaunchVelocity,startLocation,hitLocation,launchSpeed,false,0,0,ESuggestProjVelocityTraceOption::DoNotTrace);
     if(aimSolution){
         auto aimDirection=outLaunchVelocity.GetSafeNormal();
         MoveBarrelTowards(aimDirection);
@@ -38,9 +38,8 @@ void UTankAimingComponent::MoveBarrelTowards(FVector aimDirection)
         auto barrelRotator = barrel->GetForwardVector().Rotation();
         auto aimAsRotator = aimDirection.Rotation();
         auto deltaRotator = aimAsRotator - barrelRotator;
-        UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *deltaRotator.ToString());
+        //UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *deltaRotator.ToString());
     
-        // Move the barrel the right amount this frame
-        // Given a max elevation speed, and the frame time
+        barrel->Elevate(5);
     
 }      

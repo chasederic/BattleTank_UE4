@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
@@ -25,7 +26,7 @@ public:
     void AimAt(FVector hitLocation);
     
     UFUNCTION(BlueprintCallable, Category = Setup)
-    void SetBarrelReference(UStaticMeshComponent* barrelToSet);
+    void SetBarrelReference(UTankBarrel* barrelToSet);
     
     UPROPERTY(EditAnywhere, Category=Firing)
     float launchSpeed = 158000;                     // 1580 m/s, low end of reheinmetall 120 mmtank gun

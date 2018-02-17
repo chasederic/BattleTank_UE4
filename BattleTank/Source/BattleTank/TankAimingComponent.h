@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -21,10 +22,10 @@ public:
     
     // TODO add SetTurretReference
     
-    void SetBarrelReference(UStaticMeshComponent* barrel);
+    void SetBarrelReference(UTankBarrel* barrel);
     
 private:
-    UStaticMeshComponent* barrel=nullptr;
+    UTankBarrel* barrel=nullptr;
     
     void MoveBarrelTowards(FVector aimDirection);
 
