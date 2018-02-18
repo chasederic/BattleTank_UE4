@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Turret.h"
+#include "Projectile.h"
 #include "TankBarrel.h"
 #include "TankAimingComponent.h"
 #include "CoreMinimal.h"
@@ -29,9 +30,17 @@ public:
     UFUNCTION(BlueprintCallable, Category = Setup)
     void SetTurretReference(UTurret* turretToSet);
     
+    UFUNCTION(BlueprintCallable, Category = firing)
+    void Fire();
+    
     UPROPERTY(EditAnywhere, Category=Firing)
     float launchSpeed = 158000;                     // 1580 m/s, low end of reheinmetall 120 mmtank gun
                                                     // muzzle velocity - used on M1A1 abrams
+    UPROPERTY(EditAnywhere, Category=Setup)
+    TSubclassOf<AProjectile> projectile_BP;
+    
+    //local barrel reference for spawning projectile
+    UTankBarrel* localBarrelRef=nullptr;
     
 protected:
     // Called when the game starts or when spawned
