@@ -33,14 +33,21 @@ public:
     UFUNCTION(BlueprintCallable, Category = firing)
     void Fire();
     
-    UPROPERTY(EditAnywhere, Category=Firing)
-    float launchSpeed = 158000;                     // 1580 m/s, low end of reheinmetall 120 mmtank gun
-                                                    // muzzle velocity - used on M1A1 abrams
-    UPROPERTY(EditAnywhere, Category=Setup)
+    UPROPERTY(EditDefaultsOnly, Category=Setup)
     TSubclassOf<AProjectile> projectile_BP;
+    
+    UPROPERTY(EditDefaultsOnly, Category=Firing)
+    float launchSpeed = 158000;                     // default 1580 m/s, low end of reheinmetall 120 mmtank gun
+                                                    // muzzle velocity - used on M1A1 abrams
+    UPROPERTY(EditDefaultsOnly, Category=Firing)
+    //pause in shooting in seconds
+    float reloadTimeInSeconds=3.0;
     
     //local barrel reference for spawning projectile
     UTankBarrel* localBarrelRef=nullptr;
+    
+    //helps calculate if reload is done so tank can fire
+    double lastFireTime=0;
     
 protected:
     // Called when the game starts or when spawned

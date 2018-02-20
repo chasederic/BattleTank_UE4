@@ -26,13 +26,13 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
     
     bool GetLookVectorHitLocation(FVector lookdirection,FVector& hitLocation) const;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditDefaultsOnly)
     float CrosshairXLocation=0.5;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditDefaultsOnly)
     float CrosshairYLocation=0.3333;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditDefaultsOnly)
     float range = 1000000;
     
 public:
