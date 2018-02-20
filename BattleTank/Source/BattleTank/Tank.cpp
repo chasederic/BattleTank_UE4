@@ -11,6 +11,7 @@ ATank::ATank()
     
     //no need to protect pointers since adding in constructor
     tankAimingComponent=CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+    tankMovementComponent=CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 }
 
 // Called when the game starts or when spawned
@@ -50,7 +51,8 @@ void ATank::Fire(){
     auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_BP, localBarrelRef->GetSocketLocation(FName("Projectile")),localBarrelRef->GetSocketRotation(FName("Projectile")));
     projectile->LaunchProjectile(launchSpeed);
     lastFireTime=FPlatformTime::Seconds();
-    
+
     }
-    
+
 }
+

@@ -4,10 +4,6 @@
 
 
 void UTrack::SetThrottle(float throttle){
-    //auto time=GetWorld()->GetTimeSeconds();
-    auto name = GetName();
-    UE_LOG(LogTemp, Warning, TEXT("%s throttle: %f"),*name, throttle)
-    
     //clamp throttle TODO
     auto forceApplied=GetForwardVector() * throttle * trackMaxForce;
     auto forceLocation=GetComponentLocation();

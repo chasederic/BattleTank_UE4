@@ -6,6 +6,7 @@
 #include "Projectile.h"
 #include "TankBarrel.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
@@ -55,4 +56,8 @@ protected:
     
     //tank delegates aiming
     UTankAimingComponent* tankAimingComponent = nullptr;
+    
+    //tank delegates moving the tracks
+    UPROPERTY(BlueprintReadOnly)
+    UTankMovementComponent* tankMovementComponent = nullptr;
 };
