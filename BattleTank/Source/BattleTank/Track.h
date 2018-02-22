@@ -20,6 +20,6 @@ public:
     void SetThrottle(float throttle);
     
     UPROPERTY(EditDefaultsOnly)
-    float trackMaxForce=40000000; // 400,000m newtons of force
+    float trackMaxForce=20000000.0; // 400,000m newtons of force
 	
 };

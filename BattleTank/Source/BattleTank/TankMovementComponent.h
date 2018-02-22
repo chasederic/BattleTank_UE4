@@ -25,6 +25,9 @@ public:
     UFUNCTION(BlueprintCallable, Category=Input)
     void IntendMoveRight(float move);
     
+    // called by tank ai controller's tick method: automatically by move to actor under the hood
+    virtual void RequestDirectMove(const FVector& moveVelcity, bool bForceMaxSpeed) override;
+    
 private:
     UTrack* rightTrack=nullptr;
     UTrack* leftTrack=nullptr;

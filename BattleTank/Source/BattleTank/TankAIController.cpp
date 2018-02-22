@@ -10,15 +10,16 @@ void ATankAIController::Tick(float deltaTime){
     Super::Tick(deltaTime);
     
     auto playerTank=Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-    auto controlledTank=Cast<ATank>(GetPawn());
+    auto aIControlledTank=Cast<ATank>(GetPawn());
     if(playerTank){
-        // TODO move towards player
+        // move towards player
+        MoveToActor(playerTank,acceptableRadius);
         
         //Aim towards player
-        controlledTank->AimAt(playerTank->GetActorLocation());
+        aIControlledTank->AimAt(playerTank->GetActorLocation());
         
         //fire if ready
-       // controlledTank->Fire();
+        aIControlledTank->Fire();
         
     }
     
