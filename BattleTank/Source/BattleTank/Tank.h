@@ -55,6 +55,7 @@ protected:
     virtual void BeginPlay() override;
     
     //tank delegates aiming
+    UPROPERTY(BlueprintReadOnly)
     UTankAimingComponent* tankAimingComponent = nullptr;
     
     //tank delegates moving the tracks

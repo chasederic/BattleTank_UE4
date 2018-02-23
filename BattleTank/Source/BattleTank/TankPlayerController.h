@@ -14,8 +14,12 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-    
+
+protected:
+    UFUNCTION(BlueprintCallable, Category="Setup")
     ATank* GetControlledTank() const;
+    
+private:
     
     //barrel moves when the white box moves for an accurate shot
     void AimTowardCrosshair();
