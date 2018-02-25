@@ -4,6 +4,7 @@
 
 #include "TankBarrel.h"
 #include "Turret.h"
+#include "Projectile.h"
 #include "Kismet/GameplayStatics.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -23,24 +24,43 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	UTankAimingComponent();
+public:
+    void AimAt(FVector hitLocation);
     
-    void AimAt(FVector hitLocation, float launchSpeed);
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    void Initialize(UTankBarrel* barrelToSet, UTurret* turretToSet);
     
-    void SetBarrelReference(UTankBarrel* barrel);
-    
-    void SetTurretReference(UTurret* turret);
+    UFUNCTION(BlueprintCallable, Category = "Firing")
+    void Fire();
     
 protected:
     UPROPERTY(BlueprintReadOnly, Category="Firing State")
     EFiringState firingState = EFiringState::Aiming;
+               
+    UPROPERTY(EditDefaultsOnly, Category="Firing")
+    float launchSpeed = 158000;                     // default 1580 m/s, low end of reheinmetall 120 mmtank gun
+                                                    // muzzle velocity - used on M1A1 abrams
+    
+    UPROPERTY(EditDefaultsOnly, Category="Setup")
+    TSubclassOf<AProjectile> projectile_BP;
+    
+    UPROPERTY(EditDefaultsOnly, Category="Firing")
+    //pause in shooting in seconds
+    float reloadTimeInSeconds=3.0;
+    
+    //helps calculate if reload is done so tank can fire
+    double lastFireTime=0;
+               
 
 private:
+    // Sets default values for this component's properties
+    UTankAimingComponent();
+    
     UTankBarrel* barrel=nullptr;
     UTurret* turret=nullptr;
     
     void MoveBarrelTowards(FVector aimDirection);
+    
+    
 
 };

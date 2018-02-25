@@ -2,6 +2,7 @@
 
 #include "TankAIController.h"
 
+
 void ATankAIController::BeginPlay(){
     Super::BeginPlay();
 }
@@ -9,20 +10,18 @@ void ATankAIController::BeginPlay(){
 void ATankAIController::Tick(float deltaTime){
     Super::Tick(deltaTime);
     
-    auto playerTank=Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-    auto aIControlledTank=Cast<ATank>(GetPawn());
-    if(playerTank){
-        // move towards player
-        MoveToActor(playerTank,acceptableRadius);
+    auto playerTank=GetWorld()->GetFirstPlayerController()->GetPawn();
+    auto aIControlledTank=GetPawn();
+    if(!(playerTank && aIControlledTank)){ return;}
+    // move towards player. TODO check radius is in cm
+    MoveToActor(playerTank,acceptableRadius);
         
-        //Aim towards player
-        aIControlledTank->AimAt(playerTank->GetActorLocation());
-        
-        //fire if ready
-        aIControlledTank->Fire();
-        
-    }
+    //Aim towards player
+    auto aimingComponent = aIControlledTank->FindComponentByClass<UTankAimingComponent>();
+    aimingComponent->AimAt(playerTank->GetActorLocation());
     
+    //fire if ready
+    aimingComponent->Fire();
 }
 
 

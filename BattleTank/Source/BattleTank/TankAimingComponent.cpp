@@ -13,20 +13,13 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* barrelToSet){
-    //ptr check
-    if(!barrelToSet){return;}
+void UTankAimingComponent::Initialize(UTankBarrel* barrelToSet, UTurret* turretToSet){
+    turret=turretToSet;
     barrel=barrelToSet;
 }
 
-void UTankAimingComponent::SetTurretReference(UTurret* turretToSet){
-    //ptr check
-    if(!turretToSet){return;}
-    turret=turretToSet;
-}
 
-
-void UTankAimingComponent::AimAt(FVector hitLocation, float launchSpeed){
+void UTankAimingComponent::AimAt(FVector hitLocation){
     if(!barrel){
         return;
     }
@@ -40,8 +33,20 @@ void UTankAimingComponent::AimAt(FVector hitLocation, float launchSpeed){
     // if not solution don't do anything
 }
 
+void UTankAimingComponent::Fire(){
+    bool isReloaded=(FPlatformTime::Seconds()-lastFireTime)>reloadTimeInSeconds;
+    if(isReloaded){
+        //spawn projectile at the socket location on the barrel
+        auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_BP, barrel->GetSocketLocation(FName("Projectile")),barrel->GetSocketRotation(FName("Projectile")));
+        projectile->LaunchProjectile(launchSpeed);
+        lastFireTime=FPlatformTime::Seconds();
+    }
+}
+
+
 void UTankAimingComponent::MoveBarrelTowards(FVector aimDirection)
 {
+        if (!barrel || !turret) { return; }
         // Work-out difference between current barrel roation, and AimDirection
         auto barrelRotator = barrel->GetForwardVector().Rotation();
         auto aimAsRotator = aimDirection.Rotation();

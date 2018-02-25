@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"

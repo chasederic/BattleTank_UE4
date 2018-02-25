@@ -16,16 +16,15 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 	GENERATED_BODY()
 	
 public:
-    UFUNCTION(BlueprintCallable, Category=Setup)
+    UFUNCTION(BlueprintCallable, Category="Setup")
     void Initialize(UTrack* left, UTrack* right);
     
-    UFUNCTION(BlueprintCallable, Category=Input)
+    UFUNCTION(BlueprintCallable, Category="Input")
     void IntendMoveForward(float move);
     
-    UFUNCTION(BlueprintCallable, Category=Input)
+    UFUNCTION(BlueprintCallable, Category="Input")
     void IntendMoveRight(float move);
     
-
 private:
     // called by tank ai controller's tick method: automatically by move to actor under the hood
     virtual void RequestDirectMove(const FVector& moveVelcity, bool bForceMaxSpeed) override;

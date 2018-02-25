@@ -2,13 +2,13 @@
 
 #pragma once
 
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" //Must be last include, quirk UE4
 
 /**
- * 
+ * Responsible to help the player aim
  */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -16,11 +16,10 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 protected:
-    UFUNCTION(BlueprintCallable, Category="Setup")
-    ATank* GetControlledTank() const;
+    UFUNCTION(BlueprintImplementableEvent, Category="Setup")
+    void FoundAimingComponent(UTankAimingComponent* aimCompRef);    //no implementation, blueprint event node
     
 private:
-    
     //barrel moves when the white box moves for an accurate shot
     void AimTowardCrosshair();
     
