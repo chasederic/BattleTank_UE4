@@ -5,7 +5,7 @@
 void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
     auto aimingComponent=GetPawn()->FindComponentByClass<UTankAimingComponent>();
-    if(!aimingComponent){ return ;}
+    if(!ensure(aimingComponent)){ return ;}
         FoundAimingComponent(aimingComponent);
 }
 
@@ -17,7 +17,7 @@ void ATankPlayerController::Tick(float deltaTime){
 //barrel moves when the white box moves for an accurate shot
 void ATankPlayerController::AimTowardCrosshair(){
     auto aimingComponent= GetPawn()->FindComponentByClass<UTankAimingComponent>();
-    if(!aimingComponent){ return;}
+    if(!ensure(aimingComponent)){ return;}
     FVector hitLocation; // out parameter
     if(GetSightRayLocation(hitLocation)){
         aimingComponent->AimAt(hitLocation);
