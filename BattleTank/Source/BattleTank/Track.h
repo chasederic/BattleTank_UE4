@@ -20,10 +20,19 @@ public:
     void SetThrottle(float throttle);
     
     UPROPERTY(EditDefaultsOnly)
-    float trackMaxForce=20000000.0; // 400,000m newtons of force
+    float trackMaxForce=25000000.0; // 400,000m newtons of force
 private:
     UTrack();
     
-    virtual void TickComponent(float deltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+    void DriveTrack();
+    
+    void ApplySidewaysForce();
+    
+    virtual void BeginPlay() override;
+    
+    float currentThrottle=0.0;
+    
+    UFUNCTION()
+    void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	
 };
