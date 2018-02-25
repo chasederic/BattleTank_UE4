@@ -21,5 +21,9 @@ public:
     
     UPROPERTY(EditDefaultsOnly)
     float trackMaxForce=20000000.0; // 400,000m newtons of force
+private:
+    UTrack();
+    
+    virtual void TickComponent(float deltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	
 };

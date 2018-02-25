@@ -16,6 +16,7 @@ void ATankPlayerController::Tick(float deltaTime){
 
 //barrel moves when the white box moves for an accurate shot
 void ATankPlayerController::AimTowardCrosshair(){
+    if(!GetPawn()){ return;} // if not possessing, don't use ensure because during runtime we could de-posses pawn, i.e. die
     auto aimingComponent= GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if(!ensure(aimingComponent)){ return;}
     FVector hitLocation; // out parameter

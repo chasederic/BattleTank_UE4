@@ -22,7 +22,7 @@ public:
     virtual void Tick(float deltaTime) override;
     
     //how close the AI tank can come to player tank
-    UPROPERTY(EditDefaultsOnly, Category=Setup)
-    float acceptableRadius = 3000; // 30 meters
+    UPROPERTY(EditDefaultsOnly, Category="Setup")
+    float acceptableRadius = 5000; // 50 meters
         	
 };
