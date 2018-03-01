@@ -12,19 +12,36 @@ AProjectile::AProjectile()
     collisionMesh=CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
     SetRootComponent(collisionMesh);
     collisionMesh->SetNotifyRigidBodyCollision(true);
-    collisionMesh->SetVisibility(false);             //sensible default, change in bp
+    collisionMesh->SetVisibility(false);             //sensible default to invisible, change in bp when testing
     
     launchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
-    launchBlast->SetupAttachment(RootComponent);
+    launchBlast->SetupAttachment(RootComponent);      //AttachToComponet could also be used
+                                                      //but need FAttachmentTransformRules::KeepRElativeTransform parameter
+    
+    impactBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("ImpactBlast"));
+    impactBlast->SetupAttachment(RootComponent);
+    impactBlast->bAutoActivate=false;
     
     //no need to protect pointers since adding in constructor
     projectileMovement=CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
     projectileMovement->bAutoActivate=false;
 }
 
+void AProjectile::BeginPlay()
+{
+    Super::BeginPlay();
+    collisionMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+}
+
 void AProjectile::LaunchProjectile(float launchSpeed){
     projectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * launchSpeed);
     projectileMovement->Activate();
+}
+
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
+    launchBlast->Deactivate();
+    impactBlast->Activate();
 }
 
 

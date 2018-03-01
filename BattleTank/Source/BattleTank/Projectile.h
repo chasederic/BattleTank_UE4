@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "Classes/Particles/ParticleSystemComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -17,6 +17,8 @@ public:
 	// Sets default values for this actor's properties
 	AProjectile();
     
+    virtual void BeginPlay() override;
+    
     void LaunchProjectile(float launchSpeed);
 
 private:
@@ -27,5 +29,11 @@ private:
     
     UPROPERTY(VisibleAnywhere, Category="Component")
     UParticleSystemComponent* launchBlast=nullptr;
+    
+    UPROPERTY(VisibleAnywhere, Category="Component")
+    UParticleSystemComponent* impactBlast=nullptr;
+    
+    UFUNCTION()
+    void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	
 };
