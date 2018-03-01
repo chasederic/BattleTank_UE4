@@ -37,7 +37,7 @@ bool ATankPlayerController::GetSightRayLocation(FVector& hitLocation) const{
         //Line-trace
         return GetLookVectorHitLocation(lookDirection,hitLocation);
     }
-    return true;
+    return false;
 }
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector lookdirection,FVector& hitLocation) const{
