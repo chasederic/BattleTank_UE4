@@ -35,10 +35,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Firing")
     void Fire();
     
-    EFiringState GetFiringState() const;
-    
     UFUNCTION(BlueprintCallable, Category = "Firing")
-    int GetRoundsLeft() const;
+    int32 GetRoundsLeft() const;
+    
+    EFiringState GetFiringState() const;
     
 protected:
     UPROPERTY(BlueprintReadOnly, Category="Firing State")
@@ -59,7 +59,9 @@ protected:
                
     FVector aimDirection;
     
-    int roundsLeft=3;
+    UPROPERTY(EditDefaultsOnly, Category="Firing")
+    int32 roundsLeft=3;
+    
 private:
     // Sets default values for this component's properties
     UTankAimingComponent();

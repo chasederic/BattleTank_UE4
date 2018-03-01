@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -20,5 +21,11 @@ public:
 
 private:
     UProjectileMovementComponent* projectileMovement=nullptr;
+    
+    UPROPERTY(VisibleAnywhere, Category="Component")
+    UStaticMeshComponent* collisionMesh=nullptr;
+    
+    UPROPERTY(VisibleAnywhere, Category="Component")
+    UParticleSystemComponent* launchBlast=nullptr;
 	
 };
