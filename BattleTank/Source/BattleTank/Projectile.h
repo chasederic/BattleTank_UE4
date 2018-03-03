@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
+#include "TimerManager.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -37,7 +40,14 @@ private:
     UPROPERTY(VisibleAnywhere, Category="Component")
     URadialForceComponent* explosionForce=nullptr;
     
+    UPROPERTY(EditDefaultsOnly, Category="Setup")
+    float destroyDelay=5.0;         //seconds
+    
+    UPROPERTY(EditDefaultsOnly, Category="Setup")
+    float projectileDamage=1.0;        
+    
     UFUNCTION()
     void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	
+    void OnTimerExpire();
 };

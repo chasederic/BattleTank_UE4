@@ -16,4 +16,16 @@ void ATank::BeginPlay()
     
 }
 
+float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstiagtor, AActor* DamageCause){
+    int32 damagePoints=FPlatformMath::RoundToInt(DamageAmount);
+    int32 damageToApply=FMath::Clamp(damagePoints,0,currentHealth);
+    currentHealth -= damageToApply;
+    if(currentHealth <=0){
+        UE_LOG(LogTemp, Warning, TEXT("Tank Died"))
+    }
+    return damageToApply;
+}
 
+float ATank::GetHealthPercent() const{
+    return (float)currentHealth / (float)startingHealth;
+}

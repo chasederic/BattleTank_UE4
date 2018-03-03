@@ -23,6 +23,6 @@ public:
     
     //how close the AI tank can come to player tank
     UPROPERTY(EditDefaultsOnly, Category="Setup")
-    float acceptableRadius = 5000; // 50 meters
+    float acceptableRadius = 1000; // 100 meters
         	
 };
