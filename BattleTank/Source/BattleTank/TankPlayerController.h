@@ -3,6 +3,7 @@
 #pragma once
 
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" //Must be last include, quirk UE4
@@ -37,6 +38,11 @@ private:
     
     UPROPERTY(EditDefaultsOnly)
     float range = 1000000;
+    
+    void SetPawn(APawn* InPawn);
+    
+    UFUNCTION()
+    void OnPossessedTankDeath();
     
 public:
     virtual void BeginPlay() override;

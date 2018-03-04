@@ -44,7 +44,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector lookdirection,FVect
     FHitResult hitResult;
     auto start = PlayerCameraManager->GetCameraLocation();
     auto end = start + (lookdirection * range);
-    if(GetWorld()->LineTraceSingleByChannel(hitResult,start,end,ECollisionChannel::ECC_Visibility)){
+    if(GetWorld()->LineTraceSingleByChannel(hitResult,start,end,ECollisionChannel::ECC_Camera)){
         hitLocation=hitResult.Location;
         return true;
     }
@@ -56,4 +56,20 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector lookdirection,FVect
 bool ATankPlayerController::GetLookDirection(FVector2D screenLocation, FVector& lookDirection) const{
     FVector cameraWorldLocation; //unused but needed to pass into deprojecttoscreenpositiontoworld
     return DeprojectScreenPositionToWorld(screenLocation.X, screenLocation.Y, cameraWorldLocation, lookDirection);
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn){
+    Super::SetPawn(InPawn);
+    if(InPawn)
+    {
+        auto possessedTank = Cast<ATank>(InPawn);
+        if(!ensure(possessedTank)){ return;}
+        
+        //subscribe ourlocal method to the tank's death event
+        possessedTank->OnDeath.AddUniqueDynamic(this,&ATankPlayerController::OnPossessedTankDeath);
+    }
+}
+
+void ATankPlayerController::OnPossessedTankDeath(){
+    StartSpectatingOnly();
 }

@@ -23,7 +23,6 @@ void UTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimi
 }
 
 void UTrack::DriveTrack(){
-    //clamp throttle TODO
     auto forceApplied=GetForwardVector() * currentThrottle * trackMaxForce;
     auto forceLocation=GetComponentLocation();
     auto tankRoot=Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());

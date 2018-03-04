@@ -3,6 +3,7 @@
 #pragma once
 
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
@@ -16,13 +17,18 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-public:
     virtual void BeginPlay() override;
     
     virtual void Tick(float deltaTime) override;
     
+    virtual void SetPawn(APawn* InPawn) override;
+    
+    UFUNCTION()
+    void OnPossessedTankDeath();
+ 
+protected:
     //how close the AI tank can come to player tank
     UPROPERTY(EditDefaultsOnly, Category="Setup")
-    float acceptableRadius = 1000; // 100 meters
+    float acceptableRadius = 10000; // 200 meters
         	
 };
